@@ -4,6 +4,7 @@ import { tokens } from "../theme";
 import { mockUserData } from "../data/mockData";
 import Header from "../components/Header";
 import { useTheme } from "@mui/material";
+import moment from "moment";
 
 const UserInfo = () => {
   const theme = useTheme();
@@ -14,12 +15,12 @@ const UserInfo = () => {
       field: "userId",
       headerName: "User ID",
       flex: 0.5,
-      align: "center",
       headerAlign: "center",
     },
     {
       field: "name",
       headerName: "Name",
+      headerAlign: "center",
       flex: 1,
       cellClassName: "name-column--cell",
     },
@@ -29,6 +30,14 @@ const UserInfo = () => {
       type: "number",
       headerAlign: "center",
       align: "center",
+    },
+    {
+      field: "dob",
+      headerName: "Birth Date",
+      headerAlign: "center",
+      align: "center",
+      renderCell: (params) =>
+      moment(params.row.createDt).format("YYYY-MM-DD"),
     },
     {
       field: "phone",
@@ -54,6 +63,7 @@ const UserInfo = () => {
       field: "city",
       headerName: "City",
       headerAlign: "center",
+      align: "center",
       flex: 1,
     },
     {
@@ -123,7 +133,10 @@ const UserInfo = () => {
         <DataGrid
           rows={mockUserData}
           columns={columns}
+          getRowId={(row) => row.userId}
           components={{ Toolbar: GridToolbar }}
+
+          // initial hide the table column
           initialState={{
             columns: {
               columnVisibilityModel: {

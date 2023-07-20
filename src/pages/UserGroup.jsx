@@ -1,18 +1,29 @@
-import { Box, Typography, useTheme } from "@mui/material";
+import { Box, Typography, useTheme, Avatar } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../theme";
 import { mockUserData } from "../data/mockData";
 import Header from "../components/Header";
+import moment from "moment";
 
 const UserGroup = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
   const columns = [
-    { field: "id", headerName: "ID" },
+    { field: "userId", headerName: "User ID", headerAlign: "center" },
+    {
+      field: "img",
+      headerName: "Avatar",
+      headerAlign: "center",
+      align: "center",
+      renderCell: (params) => <Avatar src={params.row.img} />,
+      sortable: false,
+      filterable: false,
+    },
     {
       field: "name",
       headerName: "Name",
+      headerAlign: "center",
       flex: 1,
       cellClassName: "name-column--cell",
     },
@@ -35,6 +46,15 @@ const UserGroup = () => {
       headerName: "Email",
       headerAlign: "center",
       flex: 1,
+    },
+    {
+      field: "createDt",
+      headerName: "Creation Time",
+      headerAlign: "center",
+      flex: 1,
+      align: "center",
+      renderCell: (params) =>
+        moment(params.row.createDt).format("YYYY-MM-DD HH:MM:SS"),
     },
     {
       field: "role",
@@ -77,7 +97,12 @@ const UserGroup = () => {
           },
         }}
       >
-        <DataGrid checkboxSelection rows={mockUserData} columns={columns} />
+        <DataGrid
+          checkboxSelection
+          rows={mockUserData}
+          columns={columns}
+          getRowId={(row) => row.userId}
+        />
       </Box>
     </Box>
   );
