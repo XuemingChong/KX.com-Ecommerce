@@ -4,9 +4,9 @@ import { Routes, Route } from "react-router-dom";
 import Topbar from "./components/Topbar";
 import Sidebar from "./components/Sidebar";
 import Dashboard from "./pages/Dashboard";
-import UserGroup from "./pages/UserGroup";
+import UserGroup from "./pages/userGroup/UserGroup";
 import UserInfo from "./pages/UserInfo";
-// import Invoices from "./pages/invoices";
+import ProdManage from "./pages/productManagement/ProductManagement"
 // import Bar from "./pages/bar";
 // import Form from "./pages/form";
 // import Line from "./pages/line";
@@ -33,7 +33,7 @@ function App() {
               <Route path="/" element={<Dashboard />}/>
               <Route path="/userGroup" element={<UserGroup />}/>
               <Route path="/userInfo" element={<UserInfo />}/>
-              {/* <Route path="/invoices" element={<Invoices />}/> */}
+              <Route path="/prodManage" element={<ProdManage />}/>
               {/* <Route path="/bar" element={<Bar />}/> */}
               {/* <Route path="/form" element={<Form />}/> */}
               {/* <Route path="/line" element={<Line />}/> */}

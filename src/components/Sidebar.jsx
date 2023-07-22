@@ -18,6 +18,8 @@ import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 
+import UserProfile from "../images/user.png"
+
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -95,10 +97,10 @@ const Sidebar = () => {
             <Box mb="25px">
               <Box display="flex" justifyContent="center" alignItems="center">
                 <img
-                  alt="profile-user"
+                  alt="user-profile-picture"
                   width="100px"
                   height="100px"
-                  src={`images/user.png`}
+                  src={ UserProfile }
                   style={{ cursor: "pointer", borderRadius: "50%" }}
                 />
               </Box>
@@ -150,8 +152,8 @@ const Sidebar = () => {
               setSelected={setSelected}
             />
             <Item
-              title="Invoices Balances"
-              to="/invoices"
+              title="Product Management"
+              to="/prodManage"
               icon={<ReceiptOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}

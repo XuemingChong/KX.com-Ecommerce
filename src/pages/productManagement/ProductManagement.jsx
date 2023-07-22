@@ -1,73 +1,84 @@
-import { Box, Typography, useTheme, Avatar } from "@mui/material";
+import { Box } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
-import { tokens } from "../theme";
-import { mockUserData } from "../data/mockData";
-import Header from "../components/Header";
-import moment from "moment";
+import { tokens } from "../../theme";
+import { mockDataProduct } from "../../data/mockData";
+import Header from "../../components/Header";
+import { useTheme } from "@mui/material";
 
-const UserGroup = () => {
+import UserProfile from "../../images/user.png";
+import { ProductImage, ProductActions } from "./ProductManagementConfig";
+
+const UserInfo = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
   const columns = [
-    { field: "userId", headerName: "User ID", headerAlign: "center" },
     {
-      field: "img",
-      headerName: "Avatar",
+      field: "pId",
+      headerName: "Product ID",
       headerAlign: "center",
       align: "center",
-      renderCell: (params) => <Avatar src={params.row.img} />,
+      flex: 0.5,
+    },
+    {
+      field: "prodImg",
+      headerName: "Photo",
+      headerAlign: "center",
+      align: "center",
+      renderCell: (params) => <ProductImage src= {UserProfile}/>,
       sortable: false,
       filterable: false,
+      flex: 1,
     },
     {
       field: "name",
-      headerName: "Name",
+      headerName: "Product Name",
       headerAlign: "center",
+      align: "center",
       flex: 1,
-      cellClassName: "name-column--cell",
     },
     {
-      field: "age",
-      headerName: "Age",
+      field: "description",
+      headerName: "Description",
+      headerAlign: "center",
+      align: "center",
+      flex: 2,
+    },
+    {
+      field: "qtyInStock",
+      headerName: "Stock",
+      headerAlign: "center",
+      align: "center",
       type: "number",
-      headerAlign: "center",
-      align: "center",
+      flex: 0.5,
     },
     {
-      field: "phone",
-      headerName: "Phone Number",
+      field: "basePrice",
+      headerName: "Price",
       headerAlign: "center",
       align: "center",
       flex: 1,
     },
     {
-      field: "email",
-      headerName: "Email",
+      field: "mId",
+      headerName: "Added By",
       headerAlign: "center",
+      align: "center",
       flex: 1,
     },
     {
-      field: "createDt",
-      headerName: "Creation Time",
-      headerAlign: "center",
-      flex: 1,
-      align: "center",
-      renderCell: (params) =>
-        moment(params.row.createDt).format("YYYY-MM-DD HH:MM:SS"),
-    },
-    {
-      field: "role",
-      headerName: "User Roles",
+      headerName: "Actions",
       headerAlign: "center",
       align: "center",
+      type: "actions",
+      renderCell: () => <ProductActions />,
       flex: 1,
     },
   ];
 
   return (
     <Box m="20px">
-      <Header title="User Roles" subtitle="Managing the users" />
+      <Header title="Product Management" />
       <Box
         m="40px 0 0 0"
         height="75vh"
@@ -95,17 +106,21 @@ const UserGroup = () => {
           "& .MuiCheckbox-root": {
             color: `${colors.greenAccent[200]} !important`,
           },
+          "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
+            color: `${colors.grey[100]} !important`,
+          },
+
         }}
       >
         <DataGrid
-          checkboxSelection
-          rows={mockUserData}
+          rows={mockDataProduct}
           columns={columns}
-          getRowId={(row) => row.userId}
+          getRowId={(row) => row.pId}
+          checkboxSelection
         />
       </Box>
     </Box>
   );
 };
 
-export default UserGroup;
+export default UserInfo;
