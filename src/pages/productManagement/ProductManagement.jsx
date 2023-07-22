@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import { DataGrid } from "@mui/x-data-grid";
+import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
 import { mockDataProduct } from "../../data/mockData";
 import Header from "../../components/Header";
@@ -117,6 +117,7 @@ const UserInfo = () => {
           columns={columns}
           getRowId={(row) => row.pId}
           checkboxSelection
+          components={{ Toolbar: GridToolbar }}
         />
       </Box>
     </Box>

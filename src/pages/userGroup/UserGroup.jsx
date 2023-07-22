@@ -2,7 +2,7 @@ import React from "react";
 import { Box, useTheme, Avatar } from "@mui/material";
 import { CheckCircleOutline, CancelOutlined } from "@mui/icons-material";
 
-import { DataGrid } from "@mui/x-data-grid";
+import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
 import { mockUserData } from "../../data/mockData";
 import Header from "../../components/Header";
@@ -22,7 +22,7 @@ const UserGroup = () => {
       headerName: "Avatar",
       headerAlign: "center",
       align: "center",
-      renderCell: (params) => <Avatar src={UserProfile} />,
+      renderCell: () => <Avatar src={UserProfile} />,
       sortable: false,
       filterable: false,
     },
@@ -138,6 +138,9 @@ const UserGroup = () => {
           "& .MuiCheckbox-root": {
             color: `${colors.greenAccent[200]} !important`,
           },
+          "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
+            color: `${colors.grey[100]} !important`,
+          },
         }}
       >
         <DataGrid
@@ -145,6 +148,7 @@ const UserGroup = () => {
           rows={mockUserData}
           columns={columns}
           getRowId={(row) => row.userId}
+          components={{ Toolbar: GridToolbar }}
         />
       </Box>
     </Box>
