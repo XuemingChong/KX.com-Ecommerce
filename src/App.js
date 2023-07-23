@@ -7,8 +7,8 @@ import Dashboard from "./pages/Dashboard";
 import UserGroup from "./pages/userGroup/UserGroup";
 import UserInfo from "./pages/UserInfo";
 import ProdManage from "./pages/productManagement/ProductManagement"
+import AdminCreation from "./pages/adminCreation/AdminCreation";
 // import Bar from "./pages/bar";
-// import Form from "./pages/form";
 // import Line from "./pages/line";
 // import Pie from "./pages/pie";
 // import FAQ from "./pages/faq";
@@ -34,6 +34,7 @@ function App() {
               <Route path="/userGroup" element={<UserGroup />}/>
               <Route path="/userInfo" element={<UserInfo />}/>
               <Route path="/prodManage" element={<ProdManage />}/>
+              <Route path="/adminCreation" element={<AdminCreation />}/>
               {/* <Route path="/bar" element={<Bar />}/> */}
               {/* <Route path="/form" element={<Form />}/> */}
               {/* <Route path="/line" element={<Line />}/> */}

@@ -19,6 +19,7 @@ import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 
 import UserProfile from "../images/user.png"
+import UserGroup from "../pages/userGroup/UserGroup";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -43,6 +44,12 @@ const Sidebar = () => {
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
+  const [dataManagementLabel, setDataManagementLabel] = useState("Data Management");
+
+  const toggleSidebarCollapse = () => {
+    setIsCollapsed(!isCollapsed);
+    setDataManagementLabel(isCollapsed ? "Data Management" : "Manage");
+  };
 
   return (
     <Box
@@ -68,10 +75,10 @@ const Sidebar = () => {
         <Menu iconShape="square">
           {/* logo and menu icon */}
           <MenuItem
-            onClick={() => setIsCollapsed(!isCollapsed)}
+            onClick={toggleSidebarCollapse}
             icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
             style={{
-              margin: "10px 0 20px 0",
+              margin: "20px 0 20px 0",
               color: colors.grey[100],
             }}
           >
@@ -121,7 +128,7 @@ const Sidebar = () => {
           )}
 
           {/* Menu Items */}
-          <Box paddingLeft={isCollapsed ? undefined : "10%"}>
+          <Box paddingLeft={isCollapsed ? "0" : "10%"}>
             <Item
               title="Dashboard"
               to="/"
@@ -135,7 +142,7 @@ const Sidebar = () => {
               color={colors.grey[300]}
               sx={{ m: "15px 0 5px 20px" }}
             >
-              Data
+              {dataManagementLabel}
             </Typography>
             <Item
               title="User Role"
@@ -167,8 +174,8 @@ const Sidebar = () => {
               Pages
             </Typography>
             <Item
-              title="Profile Form"
-              to="/form"
+              title="Admin Account"
+              to="/adminCreation"
               icon={<PersonOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, useTheme, Avatar } from "@mui/material";
 import { CheckCircleOutline, CancelOutlined } from "@mui/icons-material";
 
@@ -14,6 +14,7 @@ import { UserGroupActions } from "./UserGroupConfig";
 const UserGroup = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const [isCollapsed] = useState(false);
 
   const columns = [
     { field: "userId", headerName: "User ID", headerAlign: "center" },
@@ -109,11 +110,12 @@ const UserGroup = () => {
   ];
 
   return (
-    <Box m="20px">
+    <Box m="20px" width={isCollapsed ? "100%" : "calc(100% - 64px)"}>
       <Header title="User Roles" subtitle="Managing the users" />
       <Box
         m="40px 0 0 0"
         height="75vh"
+        width={isCollapsed ? "100%" : "100%"}
         sx={{
           "& .MuiDataGrid-root": {
             border: "none",

@@ -1,3 +1,5 @@
+
+import React, { useState } from "react";
 import { Box } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
@@ -11,6 +13,7 @@ import { ProductImage, ProductActions } from "./ProductManagementConfig";
 const UserInfo = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const [isCollapsed] = useState(false);
 
   const columns = [
     {
@@ -77,7 +80,7 @@ const UserInfo = () => {
   ];
 
   return (
-    <Box m="20px">
+    <Box m="20px" width={isCollapsed ? "100%" : "calc(100% - 64px)"}>
       <Header title="Product Management" />
       <Box
         m="40px 0 0 0"
