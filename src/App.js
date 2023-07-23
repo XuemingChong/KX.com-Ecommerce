@@ -1,22 +1,19 @@
 import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 
-import Topbar from "./components/Topbar";
-import Sidebar from "./components/Sidebar";
-import Dashboard from "./pages/Dashboard";
-import UserGroup from "./pages/userGroup/UserGroup";
-import UserInfo from "./pages/UserInfo";
-import ProdManage from "./pages/productManagement/ProductManagement"
-import AdminCreation from "./pages/adminCreation/AdminCreation";
-// import Bar from "./pages/bar";
-// import Line from "./pages/line";
-// import Pie from "./pages/pie";
-// import FAQ from "./pages/faq";
-// import Geography from "./pages/geography";
+import Topbar from "./components/general/Topbar";
+import Sidebar from "./components/general/Sidebar";
+import Dashboard from "./pages/dashboard/Dashboard";
+import UserGroup from "./pages/users/UserGroup";
+import UserInfo from "./pages/users/UserInfo";
+import ProdManage from "./pages/products/ProductManagement";
+import AdminCreation from "./pages/admin/AdminCreation";
+import Pie from "./pages/charts/Pie";
+import Line from "./pages/charts/Line";
+import Geo from "./pages/charts/Geo";
 
 import { ColorModeContext, useMode } from "./theme";
 import { CssBaseline, ThemeProvider } from "@mui/material";
-
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -30,17 +27,15 @@ function App() {
           <main className="content">
             <Topbar />
             <Routes>
-              <Route path="/" element={<Dashboard />}/>
-              <Route path="/userGroup" element={<UserGroup />}/>
-              <Route path="/userInfo" element={<UserInfo />}/>
-              <Route path="/prodManage" element={<ProdManage />}/>
-              <Route path="/adminCreation" element={<AdminCreation />}/>
-              {/* <Route path="/bar" element={<Bar />}/> */}
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/userGroup" element={<UserGroup />} />
+              <Route path="/userInfo" element={<UserInfo />} />
+              <Route path="/prodManage" element={<ProdManage />} />
+              <Route path="/adminCreation" element={<AdminCreation />} />
+              <Route path="/pie" element={<Pie />} />
+              <Route path="/line" element={<Line />}/>
+              <Route path="/geo" element={<Geo />}/>
               {/* <Route path="/form" element={<Form />}/> */}
-              {/* <Route path="/line" element={<Line />}/> */}
-              {/* <Route path="/pie" element={<Pie />}/> */}
-              {/* <Route path="/faq" element={<FAQ />}/> */}
-              {/* <Route path="/geography" element={<Geography />}/> */}
             </Routes>
           </main>
         </div>

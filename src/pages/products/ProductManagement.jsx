@@ -1,11 +1,15 @@
+
 import React, { useState } from "react";
+
 import { Box } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import { tokens } from "../theme";
-import { mockUserData } from "../data/mockData";
-import Header from "../components/Header";
+import { tokens } from "../../theme";
+import { mockDataProduct } from "../../data/mockData";
 import { useTheme } from "@mui/material";
-import moment from "moment";
+
+import Header from "../../components/general/Header";
+import UserProfile from "../../images/user.png";
+import { ProductImage, ProductActions } from "./ProductManagementConfig";
 
 const UserInfo = () => {
   const theme = useTheme();
@@ -14,92 +18,71 @@ const UserInfo = () => {
 
   const columns = [
     {
-      field: "userId",
-      headerName: "User ID",
-      flex: 0.5,
+      field: "pId",
+      headerName: "Product ID",
       headerAlign: "center",
+      align: "center",
+      flex: 0.5,
+    },
+    {
+      field: "prodImg",
+      headerName: "Photo",
+      headerAlign: "center",
+      align: "center",
+      renderCell: (params) => <ProductImage src= {UserProfile}/>,
+      sortable: false,
+      filterable: false,
+      flex: 1,
     },
     {
       field: "name",
-      headerName: "Name",
+      headerName: "Product Name",
       headerAlign: "center",
+      align: "center",
       flex: 1,
-      cellClassName: "name-column--cell",
     },
     {
-      field: "age",
-      headerName: "Age",
+      field: "description",
+      headerName: "Description",
+      headerAlign: "center",
+      align: "center",
+      flex: 2,
+    },
+    {
+      field: "qtyInStock",
+      headerName: "Stock",
+      headerAlign: "center",
+      align: "center",
       type: "number",
-      headerAlign: "center",
-      align: "center",
+      flex: 0.5,
     },
     {
-      field: "dob",
-      headerName: "Birth Date",
-      headerAlign: "center",
-      align: "center",
-      renderCell: (params) =>
-      moment(params.row.createDt).format("YYYY-MM-DD"),
-    },
-    {
-      field: "phone",
-      headerName: "Phone Number",
+      field: "basePrice",
+      headerName: "Price",
       headerAlign: "center",
       align: "center",
       flex: 1,
     },
     {
-      field: "email",
-      headerName: "Email",
-      headerAlign: "center",
-      flex: 1,
-    },
-    {
-      field: "country",
-      headerName: "Country",
+      field: "mId",
+      headerName: "Added By",
       headerAlign: "center",
       align: "center",
       flex: 1,
     },
     {
-      field: "city",
-      headerName: "City",
+      headerName: "Actions",
       headerAlign: "center",
       align: "center",
-      flex: 1,
-    },
-    {
-      field: "street",
-      headerName: "Street",
-      headerAlign: "center",
-      flex: 1,
-    },
-    {
-      field: "block",
-      headerName: "Block",
-      headerAlign: "center",
-      align: "center",
-      flex: 1,
-    },
-    {
-      field: "floor",
-      headerName: "Floor",
-      headerAlign: "center",
-      align: "center",
-      flex: 1,
-    },
-    {
-      field: "unitNo",
-      headerName: "Unit No.",
-      headerAlign: "center",
-      align: "center",
+      type: "actions",
+      renderCell: () => <ProductActions />,
       flex: 1,
     },
   ];
 
   return (
-    <Box m="20px" width={isCollapsed ? "100%" : "calc(100% - 64px)"} >
-      <Header title="User Information" subtitle="List of User Information" />
+    <Box m="20px" width={isCollapsed ? "100%" : "calc(100% - 64px)"}>
+      <Header title="Product Management" />
       <Box
         m="40px 0 0 0"
         height="75vh"
@@ -130,24 +113,15 @@ const UserInfo = () => {
           "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
             color: `${colors.grey[100]} !important`,
           },
+
         }}
       >
         <DataGrid
-          rows={mockUserData}
+          rows={mockDataProduct}
           columns={columns}
-          getRowId={(row) => row.userId}
+          getRowId={(row) => row.pId}
+          checkboxSelection
           components={{ Toolbar: GridToolbar }}
-
-          // initial hide the table column
-          initialState={{
-            columns: {
-              columnVisibilityModel: {
-                block: false,
-                floor: false,
-                unitNo: false,
-              },
-            },
-          }}
         />
       </Box>
     </Box>

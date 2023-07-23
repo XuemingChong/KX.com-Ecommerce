@@ -1,31 +1,25 @@
 import React, { useState } from "react";
-import { Box, useTheme, Avatar } from "@mui/material";
-import { CheckCircleOutline, CancelOutlined } from "@mui/icons-material";
 
+import { Box } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
 import { mockUserData } from "../../data/mockData";
-import Header from "../../components/Header";
+import { useTheme } from "@mui/material";
 import moment from "moment";
 
-import UserProfile from "../../images/user.png";
-import { UserGroupActions } from "./UserGroupConfig";
+import Header from "../../components/general/Header";
 
-const UserGroup = () => {
+const UserInfo = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isCollapsed] = useState(false);
 
   const columns = [
-    { field: "userId", headerName: "User ID", headerAlign: "center" },
     {
-      field: "img",
-      headerName: "Avatar",
+      field: "userId",
+      headerName: "User ID",
+      flex: 0.5,
       headerAlign: "center",
-      align: "center",
-      renderCell: () => <Avatar src={UserProfile} />,
-      sortable: false,
-      filterable: false,
     },
     {
       field: "name",
@@ -42,6 +36,14 @@ const UserGroup = () => {
       align: "center",
     },
     {
+      field: "dob",
+      headerName: "Birth Date",
+      headerAlign: "center",
+      align: "center",
+      renderCell: (params) =>
+      moment(params.row.createDt).format("YYYY-MM-DD"),
+    },
+    {
       field: "phone",
       headerName: "Phone Number",
       headerAlign: "center",
@@ -55,67 +57,54 @@ const UserGroup = () => {
       flex: 1,
     },
     {
-      field: "createDt",
-      headerName: "Creation Time",
-      headerAlign: "center",
-      flex: 1,
-      align: "center",
-      renderCell: (params) =>
-        moment(params.row.createDt).format("YYYY-MM-DD HH:MM:SS"),
-    },
-    {
-      field: "statusId",
-      headerName: "Status",
-      headerAlign: "center",
-      align: "center",
-      sortable: false,
-      filterable: false,
-      editable: true,
-      type: "singleSelect",
-      valueOptions: ["active", "inactive"],
-      valueGetter: (params) => {
-        return params.row.statusId;
-      },
-      renderCell: (params) => {
-        const { value } = params;
-        return (
-          <div style={{ display: "flex", justifyContent: "center" }}>
-            {value === "active" ? (
-              <CheckCircleOutline style={{ color: colors.greenAccent[500] }} />
-            ) : (
-              <CancelOutlined style={{ color: colors.redAccent[500] }} />
-            )}
-          </div>
-        );
-      },
-
-      flex: 1,
-    },
-    {
-      field: "role",
-      headerName: "User Roles",
+      field: "country",
+      headerName: "Country",
       headerAlign: "center",
       align: "center",
       flex: 1,
     },
     {
-      field: "actId",
-      headerName: "Actions",
+      field: "city",
+      headerName: "City",
       headerAlign: "center",
       align: "center",
-      type: "actions",
-      renderCell: () => <UserGroupActions />,
+      flex: 1,
+    },
+    {
+      field: "street",
+      headerName: "Street",
+      headerAlign: "center",
+      flex: 1,
+    },
+    {
+      field: "block",
+      headerName: "Block",
+      headerAlign: "center",
+      align: "center",
+      flex: 1,
+    },
+    {
+      field: "floor",
+      headerName: "Floor",
+      headerAlign: "center",
+      align: "center",
+      flex: 1,
+    },
+    {
+      field: "unitNo",
+      headerName: "Unit No.",
+      headerAlign: "center",
+      align: "center",
       flex: 1,
     },
   ];
 
   return (
-    <Box m="20px" width={isCollapsed ? "100%" : "calc(100% - 64px)"}>
-      <Header title="User Roles" subtitle="Managing the users" />
+    <Box m="20px" width={isCollapsed ? "100%" : "calc(100% - 64px)"} >
+      <Header title="User Information" />
       <Box
         m="40px 0 0 0"
         height="75vh"
-        width={isCollapsed ? "100%" : "100%"}
         sx={{
           "& .MuiDataGrid-root": {
             border: "none",
@@ -146,15 +135,25 @@ const UserGroup = () => {
         }}
       >
         <DataGrid
-          checkboxSelection
           rows={mockUserData}
           columns={columns}
           getRowId={(row) => row.userId}
           components={{ Toolbar: GridToolbar }}
+
+          // initial hide the table column
+          initialState={{
+            columns: {
+              columnVisibilityModel: {
+                block: false,
+                floor: false,
+                unitNo: false,
+              },
+            },
+          }}
         />
       </Box>
     </Box>
   );
 };
 
-export default UserGroup;
+export default UserInfo;

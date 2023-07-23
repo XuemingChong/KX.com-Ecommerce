@@ -8,13 +8,11 @@ import {
   InputAdornment,
   IconButton,
 } from "@mui/material";
-import { borders } from "@mui/system";
 import { Formik } from "formik";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
 import { checkoutSchema, initialValues } from "./AdminCreationConfig";
-import Header from "../../components/Header";
-import MuiDatePicker from "../../components/MuiDatePicker";
+import Header from "../../components/general/Header";
 
 const AdminCreation = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
@@ -74,7 +72,6 @@ const AdminCreation = () => {
                     variant="filled"
                     type="text"
                     label="Username"
-                    onBlur={handleBlur}
                     onChange={handleChange}
                     value={values.username}
                     name="username"
@@ -166,7 +163,7 @@ const AdminCreation = () => {
                     onChange={handleChange}
                     value={values.phoneNum}
                     name="phoneNum"
-                    inputProps={{maxLength: "12"}}
+                    inputProps={{ maxLength: "12" }}
                     error={!!touched.phoneNum && !!errors.phoneNum}
                     helperText={touched.phoneNum && errors.phoneNum}
                     sx={{ gridColumn: "span 4" }}
@@ -177,7 +174,6 @@ const AdminCreation = () => {
                     type="submit"
                     color="secondary"
                     variant="contained"
-                    sx={{ textDecoration: "none" }}
                   >
                     Create New User
                   </Button>
